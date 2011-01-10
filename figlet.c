@@ -1658,11 +1658,11 @@ inchr iso2022()
   if (ch == 27) ch = Agetchar() + 0x100; /* ESC x */
   if (ch == 0x100 + '$') ch = Agetchar() + 0x200; /* ESC $ x */
   switch (ch) {
-    case 14: /* invoke G0 into GL */
-      gl = 0;
-      return iso2022();
-    case 15: /* invoke G1 into GL */
+    case 14: /* invoke G1 into GL */
       gl = 1;
+      return iso2022();
+    case 15: /* invoke G0 into GL */
+      gl = 0;
       return iso2022();
     case 142: case 'N' + 0x100: /* invoke G2 into GL for next char */
       save_gl = gl; save_gr = gr;
