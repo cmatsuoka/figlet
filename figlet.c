@@ -62,6 +62,7 @@
 #include <fcntl.h>     /* Needed for get_columns */
 
 #ifdef unix
+#include <unistd.h>
 #include <sys/ioctl.h> /* Needed for get_columns */
 #endif
 
@@ -655,7 +656,7 @@ char *controlname;
   inchr firstch,lastch;
   char dashcheck;
   inchr offset;
-  char *controlpath,magicnum[5];
+  char *controlpath;
   int command;
   ZFILE *controlfile;
   int namelen;
@@ -1605,7 +1606,7 @@ inchr c;
 int Agetchar()
 {
     extern int optind;		/* current argv[] element under study */
-    static AgetMode = 0;	/* >= 0 for displacement into argv[n], <0 EOF */
+    static int AgetMode = 0;	/* >= 0 for displacement into argv[n], <0 EOF */
     char   *arg;		/* pointer to active character */
     int    c;			/* current character */
 

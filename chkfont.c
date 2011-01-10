@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#ifdef __STDC__
+#include <stdlib.h>
+#endif
 
 #define DATE "20 Feb 1996"
 #define VERSION "2.2"

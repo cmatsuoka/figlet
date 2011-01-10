@@ -12,7 +12,7 @@
 # for changing this is if sh is not in the same place.
 SHELL = /bin/sh
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -Wall
 
 # Where the executables should be put
 DESTDIR = /usr/local/bin
