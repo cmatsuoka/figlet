@@ -71,10 +71,9 @@ char *ptr;
 ptr=(char *)malloc(size);
 if (ptr==NULL) {
   fprintf(stderr,"%s: Out of memory\n",myname);
+  exit(1);
   }
-else {
-  return(ptr);
-  }
+return(ptr);
 }
 
 int badsuffix(path,suffix)
