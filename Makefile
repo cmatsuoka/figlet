@@ -24,6 +24,12 @@ CFLAGS	= -g -O2 -Wall -Wno-unused-result
 LD	= gcc
 LDFLAGS =
 
+# Uncomment the following for clang
+#CC	= clang
+#CFLAGS	= -g -O2 -Wall -Wno-unused-value
+#LD	= clang
+#LDFLAGS	=
+
 # Where the executables should be put
 BINDIR	= /usr/local/bin
 
@@ -71,6 +77,7 @@ install: $(BINS)
 	cp fonts/*.flf $(DEFAULTFONTDIR)
 	cp fonts/*.flc $(DEFAULTFONTDIR)
 
+$(OBJS) chkfont.o getopt.o: Makefile
 chkfont.o: chkfont.c
 crc.o: crc.c crc.h
 figlet.o: figlet.c zipio.h
