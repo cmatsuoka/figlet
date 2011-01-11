@@ -105,12 +105,6 @@ fprintf(stderr,"Usage: %s fontfile ...\n",myname);
 exit(1);
 }
 
-
-/* Don't warn on unitialized expected_width and expected_endmark */
-#pragma GCC diagnostic ignored "-Wuninitialized"
-/* Don't warn on unused return values of fgets() and fscanf() */
-#pragma GCC diagnostic ignored "-Wuninitialized"
-
 void readchar()
 {
 int i,expected_width,k,len,newlen,diff,l;
@@ -118,6 +112,7 @@ char endmark,expected_endmark;
 int leadblanks,minleadblanks,trailblanks,mintrailblanks;
 char *ret;
 
+expected_width = expected_endmark = 0;	/* prevent compiler warning */
 for (i=0;i<charheight;i++) {
   ret = fgets(fileline,maxlen+1000,fontfile);
   if (ret == NULL) {
