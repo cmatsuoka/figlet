@@ -35,6 +35,7 @@
  *
  * Changes from 1.1.1 to 1.1.2:
  * Relicensed under the MIT license, with consent of the copyright holders.
+ * Avoid usage of unitialized "length" variable in _Zgetc
  * Claudio Matsuoka (Jan 11 2011)
  */
 
@@ -681,11 +682,11 @@ int _Zgetc(ZFILE *stream)
 
   /* If data isn't in current outbuf, get it */
   offset = ZS->fileposition & ~((long) (OUTBUFSIZE-1));
+  length = ZS->usiz - offset;
+  if (length > OUTBUFSIZE) length = OUTBUFSIZE;
+
   if (ZS->getoff != offset)
   {
-    length = ZS->usiz - offset;
-    if (length > OUTBUFSIZE) length = OUTBUFSIZE;
-
     if (BufferRead(ZS, offset, ZS->getbuf, length)) return -1;
 
     ZS->getoff = offset;

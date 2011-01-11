@@ -106,6 +106,9 @@ exit(1);
 }
 
 
+/* Don't warn on unitialized expected_width and expected_endmark */
+#pragma GCC diagnostic ignored "-Wuninitialized"
+
 void readchar()
 {
 int i,expected_width,k,len,newlen,diff,l;

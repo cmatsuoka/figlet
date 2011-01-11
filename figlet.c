@@ -1539,6 +1539,7 @@ void splitline()
   part1 = (inchr*)myalloc(sizeof(inchr)*(inchrlinelen+1));
   part2 = (inchr*)myalloc(sizeof(inchr)*(inchrlinelen+1));
   gotspace = 0;
+  lastspace = inchrlinelen-1;
   for (i=inchrlinelen-1;i>=0;i--) {
     if (!gotspace && inchrline[i]==' ') {
       gotspace = 1;
