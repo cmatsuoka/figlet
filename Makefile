@@ -20,7 +20,7 @@ SHELL = /bin/sh
 
 # The C compiler and linker to use
 CC	= gcc
-CFLAGS	= -g -O2 -Wall -Wno-unused-result
+CFLAGS	= -g -O2 -Wall
 LD	= gcc
 LDFLAGS =
 

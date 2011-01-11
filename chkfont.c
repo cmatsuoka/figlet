@@ -108,15 +108,24 @@ exit(1);
 
 /* Don't warn on unitialized expected_width and expected_endmark */
 #pragma GCC diagnostic ignored "-Wuninitialized"
+/* Don't warn on unused return values of fgets() and fscanf() */
+#pragma GCC diagnostic ignored "-Wuninitialized"
 
 void readchar()
 {
 int i,expected_width,k,len,newlen,diff,l;
 char endmark,expected_endmark;
 int leadblanks,minleadblanks,trailblanks,mintrailblanks;
+char *ret;
 
 for (i=0;i<charheight;i++) {
-  fgets(fileline,maxlen+1000,fontfile);
+  ret = fgets(fileline,maxlen+1000,fontfile);
+  if (ret == NULL) {
+    printf("%s: ERROR (fatal)- Unexpected read error after line %d.\n",
+      fontfilename,currline);
+    ec++;
+    weregone(1); if (gone) return;
+    }
   if (feof(fontfile)) {
     printf("%s: ERROR (fatal)- Unexpected end of file after line %d.\n",
       fontfilename,currline);
@@ -240,7 +249,12 @@ if (fontfile!=stdin) {
     weregone(0); if (gone) return;
     }
   }
-fscanf(fontfile,"%4s",magicnum);
+numsread=fscanf(fontfile,"%4s",magicnum);
+if (numsread == EOF) {
+  printf("%s: ERROR- can't read magic number.\n",fontfilename);
+  ec++;
+  weregone(0); if (gone) return;
+  }
 if (strcmp(magicnum,FONTFILEMAGICNUMBER)) {
   printf("%s: ERROR- Incorrect magic number.\n",fontfilename);
   ec++;
