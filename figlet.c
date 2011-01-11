@@ -2037,5 +2037,5 @@ char *argv[];
   if (outlinelen!=0) {
     printline();
     }
-  exit(0);
+  return 0;
 }
