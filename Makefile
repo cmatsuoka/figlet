@@ -34,7 +34,7 @@ LDFLAGS =
 BINDIR	= /usr/local/bin
 
 # Where the man page should be put
-MANDIR	= /usr/local/man/man6
+MANDIR	= /usr/local/man
 
 # Where figlet will search first for fonts (the ".flf" files).
 DEFAULTFONTDIR = /usr/local/share/figlet
@@ -59,7 +59,7 @@ MAN	= figlet.6
 	$(CC) -c $(CFLAGS) -DDEFAULTFONTDIR=\"$(DEFAULTFONTDIR)\" \
 		-DDEFAULTFONTFILE=\"$(DEFAULTFONTFILE)\" -o $*.o $<
 
-all: figlet chkfont
+all: $(BINS)
 
 figlet: $(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $(OBJS)
@@ -70,10 +70,12 @@ chkfont: chkfont.o
 clean:
 	rm -f *.o *~ core figlet chkfont
 
-install: $(BINS)
+install: all
+	mkdir -p $(DESTDIR)$(BINDIR)
+	mkdir -p $(DESTDIR)$(MANDIR)/man6
 	mkdir -p $(DESTDIR)$(DEFAULTFONTDIR)
 	cp $(BINS) $(DESTDIR)$(BINDIR)
-	cp $(MAN) $(DESTDIR)$(MANDIR)
+	cp $(MAN) $(DESTDIR)$(MANDIR)/man6
 	cp fonts/*.flf $(DEFAULTFONTDIR)
 	cp fonts/*.flc $(DEFAULTFONTDIR)
 
