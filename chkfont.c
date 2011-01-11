@@ -471,5 +471,5 @@ for (arg=1;arg<argc;arg++) {
   checkit();
   if (fileline!=NULL) free(fileline);
   }
-exit(0);
+return 0;
 }
