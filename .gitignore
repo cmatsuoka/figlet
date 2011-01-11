@@ -1,0 +1,6 @@
+chkfont
+figlet
+tags
+*.o
+core
+*~
