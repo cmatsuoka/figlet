@@ -62,10 +62,10 @@ MAN	= figlet.6
 all: figlet chkfont
 
 figlet: $(OBJS)
-	$(LD) $(LDFLAGS) -o $@ $+
+	$(LD) $(LDFLAGS) -o $@ $(OBJS)
 
 chkfont: chkfont.o
-	$(LD) $(LDFLAGS) -o $@ $+
+	$(LD) $(LDFLAGS) -o $@ chkfont.o
 
 clean:
 	rm -f *.o *~ core figlet chkfont
