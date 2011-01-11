@@ -90,12 +90,12 @@ you can probably still read it using
         nroff -man figlet.6 | more
 
 (2) Do a complete installation.  To do the this, set the variables
-DESTDIR and MANDIR in Makefile to the appropriate values.  DESTDIR
+BINDIR and MANDIR in Makefile to the appropriate values.  BINDIR
 should be the full pathname of the directory in which the executable
 files should be put (we recommend "/usr/games");  MANDIR should be the
 full pathname of the directory in which the figlet man page should be
 put, generally "/usr/man/man6".  Once DEFAULTFONTDIR, DEFAULTFONTFILE,
-DESTDIR and MANDIR have been set, in the directory containing the FIGlet
+BINDIR and MANDIR have been set, in the directory containing the FIGlet
 source, type "make install".
 
 If space is a problem, the only files you absolutely must have to run
