@@ -24,12 +24,6 @@ CFLAGS	= -g -O2 -Wall
 LD	= gcc
 LDFLAGS =
 
-# Uncomment the following for clang
-#CC	= clang
-#CFLAGS	= -g -O2 -Wall -Wno-unused-value
-#LD	= clang
-#LDFLAGS	=
-
 # Where the executables should be put
 BINDIR	= /usr/local/bin
 
@@ -51,9 +45,13 @@ DEFAULTFONTFILE = standard.flf
 ##  END OF CONFIGURATION SECTION
 ##
 
+VERSION	= 2.3.0
+DIST	= figlet-$(VERSION)
 OBJS	= figlet.o zipio.o crc.o inflate.o
-BINS	= figlet chkfont figlist showfigfonts
-MAN	= figlet.6
+BINS	= figlet chkfont
+MANUAL	= figlet.6
+DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) figlist showfigfonts \
+	  CHANGES FAQ README LICENSE figfont.txt crc.h inflate.h zipio.h
 
 .c.o:
 	$(CC) -c $(CFLAGS) -DDEFAULTFONTDIR=\"$(DEFAULTFONTDIR)\" \
@@ -75,9 +73,19 @@ install: all
 	mkdir -p $(DESTDIR)$(MANDIR)/man6
 	mkdir -p $(DESTDIR)$(DEFAULTFONTDIR)
 	cp $(BINS) $(DESTDIR)$(BINDIR)
-	cp $(MAN) $(DESTDIR)$(MANDIR)/man6
+	cp $(MANUAL) $(DESTDIR)$(MANDIR)/man6
 	cp fonts/*.flf $(DEFAULTFONTDIR)
 	cp fonts/*.flc $(DEFAULTFONTDIR)
+
+dist:
+	rm -Rf $(DIST) $(DIST).tar.gz
+	mkdir $(DIST)/
+	cp $(DFILES) $(DIST)/
+	mkdir $(DIST)/fonts
+	cp fonts/*.fl[fc] $(DIST)/fonts
+	tar cvf - $(DIST) | gzip -9c > $(DIST).tar.gz
+	rm -Rf $(DIST)
+	ls -l $(DIST).tar.gz
 
 $(OBJS) chkfont.o getopt.o: Makefile
 chkfont.o: chkfont.c
