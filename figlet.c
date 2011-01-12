@@ -11,8 +11,8 @@
 ****************************************************************************/
 
 #define DATE "XX January 2011"
-#define VERSION "2.3"
-#define VERSION_INT 20300
+#define VERSION "2.2.3"
+#define VERSION_INT 20203
 
 /* FIGlet (Frank, Ian & Glenn's Letters) */
 /* by Glenn Chappell */

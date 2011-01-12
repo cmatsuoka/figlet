@@ -45,7 +45,7 @@ DEFAULTFONTFILE = standard.flf
 ##  END OF CONFIGURATION SECTION
 ##
 
-VERSION	= 2.3
+VERSION	= 2.2.3
 DIST	= figlet-$(VERSION)
 OBJS	= figlet.o zipio.o crc.o inflate.o
 BINS	= figlet chkfont
