@@ -7,7 +7,7 @@
   Portions written by Paul Burton and Christiaan Keet
   Internet: <info@figlet.org>
   FIGlet, along with the various FIGlet fonts and documentation, is
-    copyrighted under the provisions of the Academic Free License 
+    copyrighted under the provisions of the New BSD License (3-clause)
     (as listed in the file "LICENSE" which is included in this package)
 ****************************************************************************/
 
