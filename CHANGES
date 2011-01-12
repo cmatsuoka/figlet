@@ -1,3 +1,37 @@
+Changes in FIGlet 2.3 (in progress)
+---------------------
+
+FIGlet 2.3 is a revision of FIGlet 2.2.2 featuring minor bugfixes and
+important licensing changes in the zipio files.  The full list of
+changes is:
+
+o	New JIS X 0201 control file (Micah Cowan)
+
+o	Fix behavior of JIS0201 SHIFT-OUT and SHIFT-IN that were previouly
+	inverted (Micah Cowan)
+
+o	Fix memory violation when smushing at line start
+
+o	Fix handling of memory allocation errors
+
+o	Relicense Ed Hamrick zipio under the MIT license. This should
+	eliminate any concerns about redistribution of FIGlet as libre
+	software.
+
+o	Update Makefile to meet modern standards in variable naming, using
+	BINDIR as the pathname for binary files and reservind DESTDIR
+	as the extra prefix commonly used in package building.
+
+o	Add a Turbo C makefile, just because I had the compiler. (this
+	also tests portability to old compilers and foreign platforms)
+
+o	Add Jonathon Abbott's man pages for figlist, showfigfonts and
+	chkfont originally contributed to the Debian Project
+
+o ...
+
+These changes were made by Claudio Matsuoka <cmatsuoka@gmail.com>
+
 Changes in FIGlet 2.2.2
 -----------------------
 

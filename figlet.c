@@ -10,9 +10,9 @@
     (as listed in the file "LICENSE" which is included in this package)
 ****************************************************************************/
 
-#define DATE "05 July 2005"
-#define VERSION "2.2.2"
-#define VERSION_INT 20202
+#define DATE "XX January 2011"
+#define VERSION "2.3"
+#define VERSION_INT 20300
 
 /* FIGlet (Frank, Ian & Glenn's Letters) */
 /* by Glenn Chappell */
