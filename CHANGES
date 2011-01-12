@@ -1,4 +1,4 @@
-Changes in FIGlet 2.2.3 (in progress)
+Changes in FIGlet 2.2.3
 -----------------------
 
 FIGlet 2.2.3 is a revision of FIGlet 2.2.2 featuring minor bugfixes and
@@ -27,8 +27,6 @@ o	Add a Turbo C makefile, just because I had the compiler. (this
 
 o	Add Jonathon Abbott's man pages for figlist, showfigfonts and
 	chkfont originally contributed to the Debian Project
-
-o ...
 
 These changes were made by Claudio Matsuoka <cmatsuoka@gmail.com>
 
