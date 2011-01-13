@@ -48,7 +48,7 @@ DEFAULTFONTFILE = standard.flf
 VERSION	= 2.2.3
 DIST	= figlet-$(VERSION)
 OBJS	= figlet.o zipio.o crc.o inflate.o
-BINS	= figlet chkfont
+BINS	= figlet chkfont figlist showfigfonts
 MANUAL	= figlet.6 chkfont.6 figlist.6 showfigfonts.6
 DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) figlist showfigfonts \
 	  CHANGES FAQ README LICENSE figfont.txt crc.h inflate.h zipio.h
