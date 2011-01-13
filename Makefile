@@ -74,8 +74,8 @@ install: all
 	mkdir -p $(DESTDIR)$(DEFAULTFONTDIR)
 	cp $(BINS) $(DESTDIR)$(BINDIR)
 	cp $(MANUAL) $(DESTDIR)$(MANDIR)/man6
-	cp fonts/*.flf $(DEFAULTFONTDIR)
-	cp fonts/*.flc $(DEFAULTFONTDIR)
+	cp fonts/*.flf $(DESTDIR)$(DEFAULTFONTDIR)
+	cp fonts/*.flc $(DESTDIR)$(DEFAULTFONTDIR)
 
 dist:
 	rm -Rf $(DIST) $(DIST).tar.gz
