@@ -1,4 +1,4 @@
-# Makefile for figlet version 2.3.0 (11 Jan 2011) 
+# Makefile for figlet version 2.2.3 (11 Jan 2011) 
 # adapted from Makefile for figlet version 2.2.2 (05 July 2005) 
 # adapted from Makefile for figlet version 2.2 (15 Oct 1996)
 # Copyright 1993, 1994,1995 Glenn Chappell and Ian Chai
@@ -50,8 +50,9 @@ DIST	= figlet-$(VERSION)
 OBJS	= figlet.o zipio.o crc.o inflate.o
 BINS	= figlet chkfont figlist showfigfonts
 MANUAL	= figlet.6 chkfont.6 figlist.6 showfigfonts.6
-DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) figlist showfigfonts \
-	  CHANGES FAQ README LICENSE figfont.txt crc.h inflate.h zipio.h
+DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) chkfont.c \
+	  figlist showfigfonts CHANGES FAQ README LICENSE figfont.txt \
+	  crc.h inflate.h zipio.h
 
 .c.o:
 	$(CC) -c $(CFLAGS) -DDEFAULTFONTDIR=\"$(DEFAULTFONTDIR)\" \
