@@ -453,6 +453,13 @@ int infonum;
       break;
     case 4: /* Outputwidth */
       printf("%d\n",outputwidth);
+      break;
+    case 5: /* Font formats */
+      printf("%s", FONTFILEMAGICNUMBER);
+#ifdef TLF_FONTS
+      printf(" %s", TOILETFILEMAGICNUMBER);
+#endif
+      printf("\n");
     }
 }
 

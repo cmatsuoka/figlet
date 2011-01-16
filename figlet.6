@@ -75,7 +75,11 @@ with adjacent FIGcharacters kerned and ``smushed'' together in various ways.
 fonts are stored in
 separate files, which can be identified by the suffix
 .RB `` .flf ''.
-Most
+In systems with UTF-8 support
+.B FIGlet
+may also support TOIlet
+.RB `` .tlf ''
+fonts.  Most
 .B FIGlet
 font files will be stored in
 .B FIGlet's
@@ -525,6 +529,19 @@ It is affected by the
 and
 .B \-t
 options.
+.TP
+.BR 5 " Supported font formats."
+This will list font formats supported by
+.B FIGlet .
+Possible formats are
+.RB `` flf2 ''
+for FIGfont Version 2
+.B .flf
+files and
+.RB `` tlf2 ''
+for TOIlet
+.B .tlf
+files.
 .RE
 .IP
 If
@@ -1063,6 +1080,10 @@ He also revised this documentation,
 with a lot of input from
 Paul Burton.
 
+Claudio Matsuoka added the support for
+.B .tlf
+files for version 2.2.4 and performs random hacks and bugfixes.
+
 As a fan of FIGlet, Christiaan Keet revised the official FIGlet documentation 
 and set up the new FIGlet website at http://www.figlet.org/ (and the 
 corresponding ftp://ftp.figlet.org/pub/figlet/)
@@ -1070,4 +1091,5 @@ corresponding ftp://ftp.figlet.org/pub/figlet/)
 .SH SEE ALSO
 .BR figlist (6),
 .BR chkfont (6),
-.BR showfigfonts (6)
+.BR showfigfonts (6),
+.BR toilet (1)
