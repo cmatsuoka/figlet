@@ -174,6 +174,9 @@ utf8_to_wchar(const char *in, size_t insize, wchar_t *out, size_t outsize,
 		}
 		*out |= high << n_bits;
 
+		if (*out == 0)			/* return at end of string */
+			break;
+
 		if (__wchar_forbitten(*out) != 0) {
 			if ((flags & UTF8_IGNORE_ERROR) == 0)
 				return (0);	/* forbitten character */
