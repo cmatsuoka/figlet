@@ -24,6 +24,10 @@ CFLAGS	= -g -O2 -Wall
 LD	= gcc
 LDFLAGS =
 
+# Feature flags:
+#   define TLF_FONTS to use TOIlet TLF fonts
+XCFLAGS	= -DTLF_FONTS
+
 # Where the executables should be put
 BINDIR	= /usr/local/bin
 
@@ -47,15 +51,15 @@ DEFAULTFONTFILE = standard.flf
 
 VERSION	= 2.2.3
 DIST	= figlet-$(VERSION)
-OBJS	= figlet.o zipio.o crc.o inflate.o
+OBJS	= figlet.o zipio.o crc.o inflate.o utf8.o
 BINS	= figlet chkfont figlist showfigfonts
 MANUAL	= figlet.6 chkfont.6 figlist.6 showfigfonts.6
 DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) chkfont.c \
 	  figlist showfigfonts CHANGES FAQ README LICENSE figfont.txt \
-	  crc.h inflate.h zipio.h
+	  crc.h inflate.h zipio.h utf8.h
 
 .c.o:
-	$(CC) -c $(CFLAGS) -DDEFAULTFONTDIR=\"$(DEFAULTFONTDIR)\" \
+	$(CC) -c $(CFLAGS) $(XCFLAGS) -DDEFAULTFONTDIR=\"$(DEFAULTFONTDIR)\" \
 		-DDEFAULTFONTFILE=\"$(DEFAULTFONTFILE)\" -o $*.o $<
 
 all: $(BINS)
