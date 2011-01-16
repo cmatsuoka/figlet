@@ -1204,7 +1204,7 @@ void readfont()
 #endif
 
   if (fontfile==NULL) {
-    fprintf(stderr,"%s: %s: Unable to open font file\n",myname,fontpath);
+    fprintf(stderr,"%s: %s: Unable to open font file\n",myname,fontname);
     exit(1);
     }
 
