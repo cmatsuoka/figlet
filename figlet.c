@@ -12,7 +12,7 @@
 ****************************************************************************/
 
 #define DATE "12 January 2011"
-#define VERSION "2.2.3"
+#define VERSION "2.2.4-pre"
 #define VERSION_INT 20203
 
 /* FIGlet (Frank, Ian & Glenn's Letters) */
