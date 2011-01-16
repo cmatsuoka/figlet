@@ -28,6 +28,8 @@ zipio.h,     -- A package for reading ZIP archives
 zipio.c,
 inflate.c,
 crc.c
+utf8.h,      -- A package to convert strings between UTF-8 and UCS-4.
+utf8.c
 getopt.c     -- Source for the standard "getopt" routine, in case you
                 don't have it in your C library.  Not used by default.
 Makefile     -- The FIGlet makefile.  Used by the make command. 
