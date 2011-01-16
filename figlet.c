@@ -1104,11 +1104,9 @@ void clearline()
 
 ****************************************************************************/
 
-void readfontchar(file,theord,line,maxlen)
+void readfontchar(file,theord)
 ZFILE *file;
 inchr theord;
-outchr *line;	/* FIXME: line isn't used */
-int maxlen;
 {
   int row,k;
   char templine[MAXLEN+1];
@@ -1122,7 +1120,7 @@ int maxlen;
   fcharlist->next = fclsave;
 
   for (row=0;row<charheight;row++) {
-    if (myfgets(templine,maxlen+1,file)==NULL) {
+    if (myfgets(templine,MAXLEN,file)==NULL) {
       templine[0] = '\0';
       }
 #ifdef TLF_FONTS
