@@ -144,6 +144,14 @@ we hope helps to establish consistency in FIGfonts and help with the creation
 of future FIGdrivers.  FIGlet 2.2 has about 4800 lines of code, of which
 over half is a support library for reading compressed files.
 
+Three years later, in July 2005, FIGlet 2.2.2 was released under a new License
+(the ``Academic Free License 2.1''). This version has proved to be very
+stable, and persisted for more five years until minor bugfixes and another
+license change resulted in the release of FIGlet 2.2.3 in January 2011. All
+license concerns involving contributed code were solved and FIGlet is now
+distributed under the ``New BSD License''. Contributed fonts amounted to more
+than 400.
+
 FIGlet 2.2 and FIGWin 1.0 both allow greater flexibility by use of new
 information which can be contained in FIGfont files without interfering with
 the function of older FIGdrivers.
