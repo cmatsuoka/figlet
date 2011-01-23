@@ -11,13 +11,11 @@
 # Usage: showfigfonts [ -d directory ] [ word ]
 
 # Set up PATH so figlet can be found
-DIRSAVE=`pwd`
-cd `dirname "$0"`
-PATH="$PATH":`pwd`
-cd "$DIRSAVE"
+DIR=`dirname $0`
+FIGLET=$DIR/figlet
 
 # Get figlet version
-FIGLETVERSION=`figlet -I1 2>/dev/null`
+FIGLETVERSION=`$FIGLET -I1 2>/dev/null`
 if [ -z "$FIGLETVERSION" ]; then
   FIGLETVERSION=20000
 fi
@@ -39,22 +37,20 @@ else
   fi
   if [ "$FIGLETVERSION" -lt 20100 ]; then
     # figlet 2.0
-    FONTDIR="`figlet -F | sed -e '1d' -e '3,$d' -e 's/Font directory: //'`"
+    FONTDIR="`$FIGLET -F | sed -e '1d' -e '3,$d' -e 's/Font directory: //'`"
   else
     # figlet 2.1 or later
-    FONTDIR="`figlet -I2`"
+    FONTDIR="`$FIGLET -I2`"
   fi
 fi
 
-cd "$FONTDIR"
-FONTLIST=`ls *.flf | sed s/\.flf$//`
-cd $DIRSAVE
+FONTLIST=`ls "$FONTDIR"/*.flf | sed 's!.*/\(.*\)\.flf$!\1!'`
 for F in $FONTLIST ; do
-  echo "$F" :
+  echo "$F :"
   if [ -n "$WORD" ]; then
-    echo "$WORD" | figlet -d "$FONTDIR" -f "$F"
+    echo "$WORD" | $FIGLET -d "$FONTDIR" -f "$F"
   else
-    echo "$F" | figlet -d "$FONTDIR" -f "$F"
+    echo "$F" | $FIGLET -d "$FONTDIR" -f "$F"
   fi
   echo "" ; echo ""
 done
