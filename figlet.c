@@ -61,6 +61,7 @@
 #endif
 #include <string.h>
 #include <ctype.h>
+#include <sys/stat.h>
 #include <fcntl.h>     /* Needed for get_columns */
 
 #ifdef unix
@@ -683,6 +684,48 @@ ZFILE *controlfile;
 
 /****************************************************************************
 
+  FIGopen
+
+  Given a FIGlet font or control file name and suffix, return the file
+  or NULL if not found
+
+****************************************************************************/
+
+ZFILE *FIGopen(name,suffix)
+char *name;
+char *suffix;
+{
+  char *fontpath;
+  ZFILE *fontfile;
+  struct stat st;
+  int namelen;
+
+  namelen = MYSTRLEN(fontdirname);
+  fontpath = (char*)alloca(sizeof(char)*
+    (namelen+MYSTRLEN(name)+MYSTRLEN(suffix)+2));
+  fontfile = NULL;
+  if (!hasdirsep(name)) {  /* not a full path name */
+    strcpy(fontpath,fontdirname);
+    fontpath[namelen] = DIRSEP;
+    fontpath[namelen+1] = '\0';
+    strcat(fontpath,name);
+    strcat(fontpath,suffix);
+    if(stat(fontpath,&st)==0) goto ok;
+    }
+  /* just append suffix */
+  strcpy(fontpath,name);
+  strcat(fontpath,suffix);
+  if(stat(fontpath,&st)==0) goto ok;
+
+  return NULL;
+
+ok:
+  fontfile = Zopen(fontpath,"rb");
+  return fontfile;
+}
+
+/****************************************************************************
+
   readcontrol
 
   Allocates memory and reads in the given control file.
@@ -696,35 +739,16 @@ char *controlname;
   inchr firstch,lastch;
   char dashcheck;
   inchr offset;
-  char *controlpath;
   int command;
   ZFILE *controlfile;
-  int namelen;
 
-  namelen = MYSTRLEN(fontdirname);
-  controlpath = (char*)myalloc(sizeof(char)
-    *(namelen+MYSTRLEN(controlname)+CSUFFIXLEN+2));
-  controlfile = NULL;
-  if (!hasdirsep(controlname)) {
-    strcpy(controlpath,fontdirname);
-    controlpath[namelen] = DIRSEP;
-    controlpath[namelen+1] = '\0';
-    strcat(controlpath,controlname);
-    strcat(controlpath,CONTROLFILESUFFIX);
-    controlfile = Zopen(controlpath,"rb");
-    }
+  controlfile = FIGopen(controlname,CONTROLFILESUFFIX);
+
   if (controlfile==NULL) {
-    strcpy(controlpath,controlname);
-    strcat(controlpath,CONTROLFILESUFFIX);
-    controlfile = Zopen(controlpath,"rb");
-    if (controlfile==NULL) {
-      fprintf(stderr,"%s: %s: Unable to open control file\n",myname,
-        controlpath);
-      exit(1);
-      }
+    fprintf(stderr,"%s: %s: Unable to open control file\n",myname,
+      controlname);
+    exit(1);
     }
-
-  free(controlpath);
 
   (*commandlistend) = (comnode*)myalloc(sizeof(comnode));
   (*commandlistend)->thecommand = 0; /* Begin with a freeze command */
@@ -888,7 +912,7 @@ void getparams()
   extern char *optarg;
   extern int optind;
   int c; /* "Should" be a char -- need int for "!= -1" test*/
-  int columns,firstfont,infoprint;
+  int columns,infoprint;
   char *controlname;
 
   if ((myname = strrchr(Myargv[0],DIRSEP))!=NULL) {
@@ -898,18 +922,7 @@ void getparams()
     myname = Myargv[0];
     }
   fontdirname = DEFAULTFONTDIR;
-  firstfont = 1;
-  fontname = (char*)myalloc(sizeof(char)*(MYSTRLEN(DEFAULTFONTFILE)+1));
-  strcpy(fontname,DEFAULTFONTFILE); /* Some systems don't have strdup() */
-  if (suffixcmp(fontname,FONTFILESUFFIX)) {
-    fontname[MYSTRLEN(fontname)-FSUFFIXLEN]='\0';
-    }
-#ifdef TLF_FONTS
-  else if (suffixcmp(fontname,TOILETFILESUFFIX)) {
-    fontname[MYSTRLEN(fontname)-TSUFFIXLEN]='\0';
-    }
-#endif
-
+  fontname = DEFAULTFONTFILE;
   cfilelist = NULL;
   cfilelistend = &cfilelist;
   commandlist = NULL;
@@ -1021,10 +1034,6 @@ void getparams()
         fontdirname = optarg;
         break;
       case 'f':
-        if (firstfont) {
-          free(fontname);
-          firstfont = 0;
-          }
         fontname = optarg;
         if (suffixcmp(fontname,FONTFILESUFFIX)) {
           fontname[MYSTRLEN(fontname)-FSUFFIXLEN] = '\0';
@@ -1169,44 +1178,12 @@ void readfont()
   int smush,smush2;
   char *fontpath,fileline[MAXLEN+1],magicnum[5];
   ZFILE *fontfile;
-  int namelen;
 
-  namelen = MYSTRLEN(fontdirname);
-  fontpath = (char*)myalloc(sizeof(char)
-    *(namelen+MYSTRLEN(fontname)+FSUFFIXLEN+2));
-  fontfile = NULL;
-  if (!hasdirsep(fontname)) {
-    strcpy(fontpath,fontdirname);
-    fontpath[namelen] = DIRSEP;
-    fontpath[namelen+1] = '\0';
-    strcat(fontpath,fontname);
-    strcat(fontpath,FONTFILESUFFIX);
-    fontfile = Zopen(fontpath,"rb");
-    }
-  if (fontfile==NULL) {
-    strcpy(fontpath,fontname);
-    strcat(fontpath,FONTFILESUFFIX);
-    fontfile = Zopen(fontpath,"rb");
-    }
-
+  fontfile = FIGopen(fontname,FONTFILESUFFIX);
 #ifdef TLF_FONTS
   if (fontfile==NULL) {
-    if (!hasdirsep(fontname)) {
-      strcpy(fontpath,fontdirname);
-      fontpath[namelen] = DIRSEP;
-      fontpath[namelen+1] = '\0';
-      strcat(fontpath,fontname);
-      strcat(fontpath,TOILETFILESUFFIX);
-      fontfile = Zopen(fontpath,"rb");
-      }
-    if (fontfile==NULL) {
-      strcpy(fontpath,fontname);
-      strcat(fontpath,TOILETFILESUFFIX);
-      fontfile = Zopen(fontpath,"rb");
-      }
-    if (fontfile!=NULL) {
-      toiletfont = 1;
-      }
+    fontfile = FIGopen(fontname,TOILETFILESUFFIX);
+    if(fontfile) toiletfont = 1;
     }
 #endif
 
@@ -1242,7 +1219,6 @@ void readfont()
   for (i=1;i<=cmtlines;i++) {
     skiptoeol(fontfile);
     }
-  free(fontpath);
 
   if (numsread<6) {
     ffright2left = 0;

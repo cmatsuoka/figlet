@@ -39,11 +39,11 @@ DEFAULTFONTDIR = /usr/local/share/figlet
 # Use this definition if you can't put things in /usr/local/share/figlet
 DEFAULTFONTDIR = fonts
 
-# The filename of the font to be used if no other is specified
-#   (standard.flf is recommended, but any other can be used).
-#   This font file should reside in the directory specified by
-#   DEFAULTFONTDIR.
-DEFAULTFONTFILE = standard.flf
+# The filename of the font to be used if no other is specified,
+#   without suffix.(standard is recommended, but any other can be
+#   used). This font file should reside in the directory specified
+#   by DEFAULTFONTDIR.
+DEFAULTFONTFILE = standard
 
 ##
 ##  END OF CONFIGURATION SECTION
