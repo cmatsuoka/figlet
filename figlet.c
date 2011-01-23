@@ -1426,7 +1426,7 @@ int smushamt()
 int addchar(c)
 inchr c;
 {
-  int smushamount,row,k,column,offset;
+  int smushamount,row,k,column;
   char *templine;
 
   getletter(c);
@@ -1436,7 +1436,6 @@ inchr c;
     return 0;
     }
 
-  offset = 0;
   templine = (char*)myalloc(sizeof(char)*(outlinelenlimit+1));
   for (row=0;row<charheight;row++) {
     if (right2left) {
@@ -1452,11 +1451,10 @@ inchr c;
       for (k=0;k<smushamount;k++) {
 	column = outlinelen-smushamount+k;
 	if (column < 0) {
-	  offset = -column;
 	  column = 0;
 	  }
         outputline[row][column] =
-          smushem(outputline[row][column],currchar[row][k + offset]);
+          smushem(outputline[row][column],currchar[row][k]);
         }
       strcat(outputline[row],currchar[row]+smushamount);
       }
