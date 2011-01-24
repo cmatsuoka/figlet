@@ -52,7 +52,7 @@ DEFAULTFONTFILE = standard
 ##  END OF CONFIGURATION SECTION
 ##
 
-VERSION	= 2.2.3
+VERSION	= 2.2.4
 DIST	= figlet-$(VERSION)
 OBJS	= figlet.o zipio.o crc.o inflate.o utf8.o
 BINS	= figlet chkfont figlist showfigfonts
@@ -94,6 +94,11 @@ dist:
 	tar cvf - $(DIST) | gzip -9c > $(DIST).tar.gz
 	rm -Rf $(DIST)
 	ls -l $(DIST).tar.gz
+
+test:
+	tar xf $(DIST).tar.gz
+	(cd $(DIST); make; ../tests.sh)
+	rm -Rf $(DIST)
 
 $(OBJS) chkfont.o getopt.o: Makefile
 chkfont.o: chkfont.c

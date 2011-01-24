@@ -1,13 +1,19 @@
 Changes in FIGlet 2.2.4 (in progress)
 -----------------------
 
-FIGlet 2.2.4 is a revision of FIGlet 2.2.3 featuring
+FIGlet 2.2.4 is a revision of FIGlet 2.2.3 featuring bugfixes and support
+to tlf2 fonts.  The full list of changes is:
 
-The full list of changes is:
+o	Add support to Sam Hocevar's TOIlet TLF fonts containing UTF-8
+	encoded Unicode characters.
 
-o	Add support to Sam Hocevar's TOIlet TLF fonts containing
-	UTF-8 encoded Unicode characters.
+o	Add infocode 5 to list supported font formats
 
+o	Fix rendering error caused by the previous attempt to fix invalid
+	memory accesses when smushing at start of line
+
+These changes were made by Claudio Matsuoka <cmatsuoka@gmail.com>
+26 January 2011
 
 Changes in FIGlet 2.2.3
 -----------------------
