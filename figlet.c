@@ -11,9 +11,9 @@
     (as listed in the file "LICENSE" which is included in this package)
 ****************************************************************************/
 
-#define DATE "12 January 2011"
-#define VERSION "2.2.4-pre"
-#define VERSION_INT 20203
+#define DATE "26 January 2011"
+#define VERSION "2.2.4"
+#define VERSION_INT 20204
 
 /* FIGlet (Frank, Ian & Glenn's Letters) */
 /* by Glenn Chappell */
@@ -37,7 +37,8 @@
    http://www.figlet.org/  */
 /* Release 2.2.2 by Christiaan Keet: License changed from "Artistic License"
    to "Academic Free License" as agreed by FIGlet authors. 05 July 2005 */
-/* Release 2.2.3 by Claudio Matsuoka, 12 January 2011 */
+/* Release 2.2.3 by Claudio Matsuoka, 12 Jan 2011: BSD license, fixes */
+/* Release 2.2.4 by Claudio Matsuoka, 26 Jan 2011: tlf2 font support */
 
 /*---------------------------------------------------------------------------
   DEFAULTFONTDIR and DEFAULTFONTFILE should be defined in the Makefile.
