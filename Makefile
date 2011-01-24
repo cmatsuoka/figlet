@@ -56,7 +56,7 @@ BINS	= figlet chkfont figlist showfigfonts
 MANUAL	= figlet.6 chkfont.6 figlist.6 showfigfonts.6
 DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) chkfont.c \
 	  figlist showfigfonts CHANGES FAQ README LICENSE figfont.txt \
-	  crc.h inflate.h zipio.h utf8.h
+	  crc.h inflate.h zipio.h utf8.h run-tests.sh
 
 .c.o:
 	$(CC) -c $(CFLAGS) $(XCFLAGS) -DDEFAULTFONTDIR=\"$(DEFAULTFONTDIR)\" \
@@ -88,14 +88,19 @@ dist:
 	cp $(DFILES) $(DIST)/
 	mkdir $(DIST)/fonts
 	cp fonts/*.fl[fc] $(DIST)/fonts
+	mkdir $(DIST)/tests
+	cp tests/*txt tests/emboss.tlf $(DIST)/tests
 	tar cvf - $(DIST) | gzip -9c > $(DIST).tar.gz
+	rm -Rf $(DIST)
+	tar xf $(DIST).tar.gz
+	(cd $(DIST); make all test)
 	rm -Rf $(DIST)
 	ls -l $(DIST).tar.gz
 
 test:
-	tar xf $(DIST).tar.gz
-	(cd $(DIST); make; ../tests.sh)
-	rm -Rf $(DIST)
+	@echo -n "Run tests in "
+	@pwd
+	@./run-tests.sh
 
 $(OBJS) chkfont.o getopt.o: Makefile
 chkfont.o: chkfont.c

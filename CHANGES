@@ -12,6 +12,8 @@ o	Add infocode 5 to list supported font formats
 o	Fix rendering error caused by the previous attempt to fix invalid
 	memory accesses when smushing at start of line
 
+o	Add regression tests
+
 These changes were made by Claudio Matsuoka <cmatsuoka@gmail.com>
 26 January 2011
 
