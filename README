@@ -154,7 +154,7 @@ you had said "figlet -f smslant" above, you would have seen
 Here are some other useful command line options:
 
 -c   center -- centers the output of FIGlet.
--k  tells FIGlet to kern characters without smushing them together.
+-k   tells FIGlet to kern characters without smushing them together.
 -t   terminal -- FIGlet asks your terminal how wide it is, and uses
      this to determine when to break lines.  Normally, FIGlet assumes
      80 columns so that people with wide terminals won't annoy the
@@ -237,5 +237,6 @@ FIGlet was written mostly by Glenn Chappell <c486scm@semovm.semo.edu>.  The
 author not being an e-mail fanatic, most correspondence (bug reports, rave
 reviews, etc.) used to be handled to his secretary (who is definitely
 an e-mail fanatic), Ian Chai <ianchai@usa.net> and has since moved on to 
-another FIGlet enthusiast, Christiaan Keet <info@figlet.org>
+another FIGlet enthusiast, Christiaan Keet <info@figlet.org>. Current
+maintenance is conducted by Claudio Matsuoka <cmatsuoka@gmail.com>.
 
