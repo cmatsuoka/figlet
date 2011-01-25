@@ -1348,8 +1348,8 @@ inchr c;
 
 ****************************************************************************/
 
-char smushem(lch,rch)
-char lch,rch;
+outchr smushem(lch,rch)
+outchr lch,rch;
 {
   if (lch==' ') return rch;
   if (rch==' ') return lch;
@@ -1437,7 +1437,7 @@ int smushamt()
 {
   int maxsmush,amt;
   int row,linebd,charbd;
-  char ch1,ch2;
+  outchr ch1,ch2;
 
   if ((smushmode & (SM_SMUSH | SM_KERN)) == 0) {
     return 0;
