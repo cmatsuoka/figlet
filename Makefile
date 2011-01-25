@@ -93,20 +93,23 @@ dist:
 	tar cvf - $(DIST) | gzip -9c > $(DIST).tar.gz
 	rm -Rf $(DIST)
 	tar xf $(DIST).tar.gz
-	@(cd $(DIST); make all test; \
-	 echo -n "\nInfocode: "; ./figlet -I1; \
-	 ./figlet -v|sed -n '/Version/s/.*\(Version\)/\1/p'; \
-	 echo -n "README: "; head -1 < README|sed 's/.*) //'; \
-	 echo -n "FAQ: "; grep latest FAQ|sed 's/ and can.*//'; \
-	 grep -h "^\.TH" *.6)
+	(cd $(DIST); make all check vercheck)
 	@rm -Rf $(DIST)
 	@echo
 	@ls -l $(DIST).tar.gz
 
-test:
+check:
 	@echo -n "Run tests in "
 	@pwd
 	@./run-tests.sh
+	@echo
+
+vercheck:
+	@echo -n "Infocode: "; ./figlet -I1
+	@./figlet -v|sed -n '/Version/s/.*\(Version\)/\1/p'
+	@echo -n "README: "; head -1 < README|sed 's/.*) //'
+	@echo -n "FAQ: "; grep latest FAQ|sed 's/ and can.*//'
+	@grep -h "^\.TH" *.6
 
 $(OBJS) chkfont.o getopt.o: Makefile
 chkfont.o: chkfont.c
