@@ -1,5 +1,5 @@
-# Makefile for figlet version 2.2.3 (11 Jan 2011) 
-# adapted from Makefile for figlet version 2.2.2 (05 July 2005) 
+# Makefile for figlet version 2.2.3 (11 Jan 2011)
+# adapted from Makefile for figlet version 2.2.2 (05 July 2005)
 # adapted from Makefile for figlet version 2.2 (15 Oct 1996)
 # Copyright 1993, 1994,1995 Glenn Chappell and Ian Chai
 # Copyright 1996, 1997, 1998, 1999, 2000, 2001 John Cowan
@@ -28,16 +28,19 @@ LDFLAGS =
 #   define TLF_FONTS to use TOIlet TLF fonts
 XCFLAGS	= -DTLF_FONTS
 
+# Where to install files
+prefix = /usr/local
+
 # Where the executables should be put
-BINDIR	= /usr/local/bin
+BINDIR	= $(prefix)/bin
 
 # Where the man page should be put
-MANDIR	= /usr/local/man
+MANDIR	= $(prefix)/man
 
 # Where figlet will search first for fonts (the ".flf" files).
-DEFAULTFONTDIR = /usr/local/share/figlet
-# Use this definition if you can't put things in /usr/local/share/figlet
-DEFAULTFONTDIR = fonts
+DEFAULTFONTDIR = $(prefix)/share/figlet
+# Use this definition if you can't put things in $(prefix)/share/figlet
+#DEFAULTFONTDIR = fonts
 
 # The filename of the font to be used if no other is specified,
 #   without suffix.(standard is recommended, but any other can be
@@ -47,7 +50,7 @@ DEFAULTFONTFILE = standard
 
 ##
 ##  END OF CONFIGURATION SECTION
-##
+##
 
 VERSION	= 2.2.3
 DIST	= figlet-$(VERSION)
