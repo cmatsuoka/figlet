@@ -96,7 +96,7 @@ dist:
 	tar cvf - $(DIST) | gzip -9c > $(DIST).tar.gz
 	rm -Rf $(DIST)
 	tar xf $(DIST).tar.gz
-	(cd $(DIST); make all check vercheck)
+	(cd $(DIST); make all check vercheck DEFAULTFONTDIR=fonts)
 	@rm -Rf $(DIST)
 	@echo
 	@ls -l $(DIST).tar.gz

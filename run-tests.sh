@@ -33,6 +33,10 @@ $CMD -f small "Test results" | tee -a $LOGFILE
 file="$TESTDIR/input.txt"
 cmd="cat $file|$CMD"
 
+echo -n "Default font dir: "; $CMD -I2
+echo -n "Default font: "; $CMD -I3
+echo
+
 run_test 001 "showfigfonts output" "./showfigfonts"
 run_test 002 "text rendering in all fonts" \
   "for i in fonts/*.flf; do $cmd -f \$i; done"
