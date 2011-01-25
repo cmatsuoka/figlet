@@ -1177,7 +1177,7 @@ void readfont()
   inchr theord;
   int maxlen,cmtlines,ffright2left;
   int smush,smush2;
-  char *fontpath,fileline[MAXLEN+1],magicnum[5];
+  char fileline[MAXLEN+1],magicnum[5];
   ZFILE *fontfile;
 
   fontfile = FIGopen(fontname,FONTFILESUFFIX);
@@ -1205,7 +1205,7 @@ void readfont()
     &ffright2left,&smush2);
 
   if (maxlen > MAXLEN) {
-    fprintf(stderr,"%s: %s: character is too wide\n",myname,fontpath);
+    fprintf(stderr,"%s: %s: character is too wide\n",myname,fontname);
     exit(1);
     }
 #ifdef TLF_FONTS
@@ -1214,7 +1214,7 @@ void readfont()
 #else
   if (strcmp(magicnum,FONTFILEMAGICNUMBER) || numsread<5) {
 #endif
-    fprintf(stderr,"%s: %s: Not a FIGlet 2 font file\n",myname,fontpath);
+    fprintf(stderr,"%s: %s: Not a FIGlet 2 font file\n",myname,fontname);
     exit(1);
     }
   for (i=1;i<=cmtlines;i++) {
