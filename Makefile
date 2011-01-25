@@ -1,4 +1,4 @@
-# Makefile for figlet version 2.2.3 (11 Jan 2011)
+# Makefile for figlet version 2.2.4 (26 Jan 2011)
 # adapted from Makefile for figlet version 2.2.2 (05 July 2005)
 # adapted from Makefile for figlet version 2.2 (15 Oct 1996)
 # Copyright 1993, 1994,1995 Glenn Chappell and Ian Chai
@@ -29,7 +29,7 @@ LDFLAGS =
 XCFLAGS	= -DTLF_FONTS
 
 # Where to install files
-prefix = /usr/local
+prefix	= /usr/local
 
 # Where the executables should be put
 BINDIR	= $(prefix)/bin
