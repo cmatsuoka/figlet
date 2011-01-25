@@ -13,6 +13,7 @@ run_test() {
 	echo >> $LOGFILE
 	echo -n "Run test $test_num: ${test_dsc}... " | tee -a $LOGFILE
 	echo >> $LOGFILE
+	echo "Command: $test_cmd" >> $LOGFILE
 	eval "$test_cmd" > "$OUTPUT" 2>> $LOGFILE
 	cmp "$OUTPUT" "tests/res${test_num}.txt" >> $LOGFILE 2>&1
 	if [ $? -eq 0 ]; then
@@ -44,11 +45,20 @@ run_test 008 "center justification" "$cmd -c"
 run_test 009 "kerning mode" "$cmd -k"
 run_test 010 "full width mode" "$cmd -W"
 run_test 011 "overlap mode" "$cmd -o"
-run_test 012 "TLF font rendering" "$cmd -f tests/emboss"
+run_test 012 "tlf2 font rendering" "$cmd -f tests/emboss"
 run_test 013 "kerning flush-left right-to-left mode" "$cmd -klR"
 run_test 014 "kerning centered right-to-left mode (slant)" "$cmd -kcR -f slant"
 run_test 015 "full-width flush-right right-to-left mode" "$cmd -WrR"
 run_test 016 "overlap flush-right mode (big)" "$cmd -or -f big"
+run_test 017 "tlf2 kerning flush-right mode" "$cmd -kr -f tests/emboss"
+run_test 018 "tlf2 overlap centered mode" "$cmd -oc -f tests/emboss"
+run_test 019 "tlf2 full-width flush-left right-to-left mode" \
+  "$cmd -WRl -f tests/emboss"
+run_test 020 "specify font directory" \
+  "X=`mktemp -d`;cp fonts/script.flf \$X/foo.flf;$cmd -d\$X -ffoo;rm -Rf \$X"
+run_test 021 "paragraph mode long line output" "$cmd -p -w250"
+run_test 022 "short line output" "$cmd -w5"
+run_test 023 "kerning paragraph centered mode (small)" "$cmd -kpc -fsmall"
 
 rm -f "$OUTPUT"
 
