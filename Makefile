@@ -96,9 +96,15 @@ dist:
 	tar cvf - $(DIST) | gzip -9c > $(DIST).tar.gz
 	rm -Rf $(DIST)
 	tar xf $(DIST).tar.gz
-	(cd $(DIST); make all test)
-	rm -Rf $(DIST)
-	ls -l $(DIST).tar.gz
+	(cd $(DIST); make all test; \
+	 echo -n "\nInfocode: "; ./figlet -I1; \
+	 ./figlet -v|sed -n '/Version/s/.*\(Version\)/\1/p'; \
+	 echo -n "README: "; head -1 < README|sed 's/.*) //'; \
+	 echo -n "FAQ: "; grep latest FAQ|sed 's/ and can.*//'; \
+	 grep -h "^\.TH" *.6)
+	@rm -Rf $(DIST)
+	@echo
+	@ls -l $(DIST).tar.gz
 
 test:
 	@echo -n "Run tests in "
