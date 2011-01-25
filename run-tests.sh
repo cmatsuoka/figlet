@@ -62,10 +62,11 @@ run_test 023 "kerning paragraph centered mode (small)" "$cmd -kpc -fsmall"
 
 rm -f "$OUTPUT"
 
+echo
 if [ $result -ne 0 ]; then
-	echo "\n $fail tests failed. See $LOGFILE for result details"
+	echo " $fail tests failed. See $LOGFILE for result details"
 else
-	echo "\n All tests passed."
+	echo " All tests passed."
 fi
 
 exit $result
