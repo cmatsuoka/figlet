@@ -96,7 +96,7 @@ dist:
 	tar cvf - $(DIST) | gzip -9c > $(DIST).tar.gz
 	rm -Rf $(DIST)
 	tar xf $(DIST).tar.gz
-	(cd $(DIST); make all test; \
+	@(cd $(DIST); make all test; \
 	 echo -n "\nInfocode: "; ./figlet -I1; \
 	 ./figlet -v|sed -n '/Version/s/.*\(Version\)/\1/p'; \
 	 echo -n "README: "; head -1 < README|sed 's/.*) //'; \
