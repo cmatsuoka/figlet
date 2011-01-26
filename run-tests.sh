@@ -4,11 +4,7 @@ TESTDIR=tests
 OUTPUT=`mktemp`
 LOGFILE=tests.log
 CMD=./figlet
-
-if [ -n "$1" ]; then
-	FONTDIR="-d $1"
-	CMD="$CMD $FONTDIR"
-fi
+FONTDIR="$1"
 
 run_test() {
 	test_num=$1
@@ -39,10 +35,15 @@ file="$TESTDIR/input.txt"
 cmd="cat $file|$CMD"
 
 echo -n "Default font dir: "; $CMD -I2
+if [ -n "$FONTDIR" ]; then
+	FIGLET_FONTDIR="$FONTDIR"
+	export FIGLET_FONTDIR
+fi
+echo -n "Current font dir: "; $CMD -I2
 echo -n "Default font: "; $CMD -I3
 echo
 
-run_test 001 "showfigfonts output" "./showfigfonts $FONTDIR"
+run_test 001 "showfigfonts output" "./showfigfonts"
 run_test 002 "text rendering in all fonts" \
   "for i in fonts/*.flf; do $cmd -f \$i; done"
 run_test 003 "long text rendering" "cat tests/longtext.txt|./figlet"

@@ -914,7 +914,7 @@ void getparams()
   extern int optind;
   int c; /* "Should" be a char -- need int for "!= -1" test*/
   int columns,infoprint;
-  char *controlname;
+  char *controlname,*env;
 
   if ((myname = strrchr(Myargv[0],DIRSEP))!=NULL) {
     myname++;
@@ -923,6 +923,10 @@ void getparams()
     myname = Myargv[0];
     }
   fontdirname = DEFAULTFONTDIR;
+  env = getenv("FIGLET_FONTDIR");
+  if (env!=NULL) {
+    fontdirname = env;
+    }
   fontname = DEFAULTFONTFILE;
   cfilelist = NULL;
   cfilelistend = &cfilelist;

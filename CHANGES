@@ -12,6 +12,9 @@ o	Add infocode 5 to list supported font formats
 o	Fix rendering error caused by the previous attempt to fix invalid
 	memory accesses when smushing at start of line
 
+o	New environment variable FIGLET_FONTDIR can be used to specify
+	the path to search for fonts
+
 o	Add regression tests
 
 These changes were made by Claudio Matsuoka <cmatsuoka@gmail.com>
