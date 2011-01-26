@@ -10,7 +10,6 @@
 #
 # Usage: showfigfonts [ -d directory ] [ word ]
 
-# Set up PATH so figlet can be found
 DIR=`dirname $0`
 FIGLET=$DIR/figlet
 

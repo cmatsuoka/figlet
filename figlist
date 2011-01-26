@@ -7,14 +7,11 @@
 #
 # Usage: figlist [ -d directory ]
 
-# Set up PATH so figlet can be found
-DIRSAVE=`pwd`
-cd `dirname "$0"`
-PATH="$PATH":`pwd`
-cd "$DIRSAVE"
+DIR=`dirname $0`
+FIGLET=$DIR/figlet
 
 # Get figlet version
-FIGLETVERSION=`figlet -I1 2>/dev/null`
+FIGLETVERSION=`$FIGLET -I1 2>/dev/null`
 if [ -z "$FIGLETVERSION" ]; then
   FIGLETVERSION=20000
 fi
@@ -37,14 +34,14 @@ fi
 
 if [ "$FIGLETVERSION" -lt 20100 ]; then
   # figlet 2.0
-  figlet $FONTDIROPT -F
+  $FIGLET $FONTDIROPT -F
   exit
 fi
 
 # From here on we may assume figlet 2.1 or later
 
-FONTDIR=`figlet $FONTDIROPT -I2`
-FONT=`figlet -I3`
+FONTDIR=`$FIGLET $FONTDIROPT -I2`
+FONT=`$FIGLET -I3`
 echo "Default font: $FONT"
 echo "Font directory: $FONTDIR"
 
