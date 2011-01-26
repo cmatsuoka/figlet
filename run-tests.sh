@@ -1,5 +1,8 @@
 #!/bin/sh
 
+LC_ALL=POSIX
+export LC_ALL
+
 TESTDIR=tests
 OUTPUT=`mktemp`
 LOGFILE=tests.log
@@ -69,6 +72,7 @@ run_test 020 "specify font directory" \
 run_test 021 "paragraph mode long line output" "$cmd -p -w250"
 run_test 022 "short line output" "$cmd -w5"
 run_test 023 "kerning paragraph centered mode (small)" "$cmd -kpc -fsmall"
+run_test 024 "list of control files" "ls fonts/*flc"
 
 rm -f "$OUTPUT"
 
