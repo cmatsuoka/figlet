@@ -32,7 +32,6 @@ run_test() {
 result=0
 fail=0
 $CMD -v > $LOGFILE
-$CMD -f small "Test results" | tee -a $LOGFILE
 
 file="$TESTDIR/input.txt"
 cmd="cat $file|$CMD"
@@ -44,7 +43,7 @@ if [ -n "$FONTDIR" ]; then
 fi
 echo -n "Current font dir: "; $CMD -I2
 echo -n "Default font: "; $CMD -I3
-echo
+$CMD -f small "Test results" | tee -a $LOGFILE
 
 run_test 001 "showfigfonts output" "./showfigfonts"
 run_test 002 "text rendering in all fonts" \
