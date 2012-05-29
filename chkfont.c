@@ -272,6 +272,7 @@ numsread=sscanf(fileline,"%c %d %d %d %d %d %d %d %d",
   &hardblank,&charheight,&upheight,&maxlen,&old_layout,&cmtcount,
   &ffrighttoleft,&layout,&spectagcnt);
 free(fileline);
+fileline = NULL;
 if (numsread<7) {
   ffrighttoleft=0;
   }
