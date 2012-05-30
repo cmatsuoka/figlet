@@ -52,7 +52,7 @@ DEFAULTFONTFILE = standard
 ##  END OF CONFIGURATION SECTION
 ##
 
-VERSION	= 2.2.4
+VERSION	= 2.2.5
 DIST	= figlet-$(VERSION)
 OBJS	= figlet.o zipio.o crc.o inflate.o utf8.o
 BINS	= figlet chkfont figlist showfigfonts

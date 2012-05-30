@@ -3,7 +3,7 @@
   FIGlet Copyright 1991, 1993, 1994 Glenn Chappell and Ian Chai
   FIGlet Copyright 1996, 1997, 1998, 1999, 2000, 2001 John Cowan
   FIGlet Copyright 2002 Christiaan Keet
-  FIGlet Copyright 2011 Claudio Matsuoka
+  FIGlet Copyright 2011, 2012 Claudio Matsuoka
   Portions written by Paul Burton and Christiaan Keet
   Internet: <info@figlet.org>
   FIGlet, along with the various FIGlet fonts and documentation, is
@@ -11,9 +11,9 @@
     (as listed in the file "LICENSE" which is included in this package)
 ****************************************************************************/
 
-#define DATE "26 January 2011"
-#define VERSION "2.2.4"
-#define VERSION_INT 20204
+#define DATE "31 May 2012"
+#define VERSION "2.2.5"
+#define VERSION_INT 20205
 
 /* FIGlet (Frank, Ian & Glenn's Letters) */
 /* by Glenn Chappell */
@@ -39,6 +39,7 @@
    to "Academic Free License" as agreed by FIGlet authors. 05 July 2005 */
 /* Release 2.2.3 by Claudio Matsuoka, 12 Jan 2011: BSD license, fixes */
 /* Release 2.2.4 by Claudio Matsuoka, 26 Jan 2011: tlf2 font support */
+/* Release 2.2.5 by Claudio Matsuoka, 31 May 2012: flc licensing, minor fixes */
 
 /*---------------------------------------------------------------------------
   DEFAULTFONTDIR and DEFAULTFONTFILE should be defined in the Makefile.
@@ -431,7 +432,7 @@ int infonum;
 {
   switch (infonum) {
     case 0: /* Copyright message */
-      printf("FIGlet Copyright (C) 1991-2011 Glenn Chappell, Ian Chai, ");
+      printf("FIGlet Copyright (C) 1991-2012 Glenn Chappell, Ian Chai, ");
       printf("John Cowan,\nChristiaan Keet and Claudio Matsuoka\n");
       printf("Internet: <info@figlet.org> ");
       printf("Version: %s, date: %s\n\n",VERSION,DATE);

@@ -1,3 +1,23 @@
+Changes in FIGlet 2.2.5
+-----------------------
+
+FIGlet 2.2.5 is a revision of FIGlet 2.2.4 containing updated andproperly
+licensed ISO8859 map files.  The full list of changes is:
+
+o	Add regression tests for uskata and jis0201 control files
+
+o	Properly escape mins signs in figlist(6) man page (Jonathan
+	McCrohan)
+
+o	Fix chkfont coredump on invalid input (Kenneth Davies and
+	Jonathan McCrohan)
+
+o	Update ISO8859 map files to fix licensing issue raised in Debian
+	bugs 673096 and 674844
+
+These changes were made by Claudio Matsuoka <cmatsuoka@gmail.com>
+31 May 2012
+
 Changes in FIGlet 2.2.4
 -----------------------
 
