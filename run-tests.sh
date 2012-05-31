@@ -15,7 +15,7 @@ run_test() {
 	test_cmd=$3
 
 	echo >> $LOGFILE
-	echo -n "Run test $test_num: ${test_dsc}... " | tee -a $LOGFILE
+	printf "Run test $test_num: ${test_dsc}... " | tee -a $LOGFILE
 	echo >> $LOGFILE
 	echo "Command: $test_cmd" >> $LOGFILE
 	eval "$test_cmd" > "$OUTPUT" 2>> $LOGFILE
@@ -36,13 +36,13 @@ $CMD -v > $LOGFILE
 file="$TESTDIR/input.txt"
 cmd="cat $file|$CMD"
 
-echo -n "Default font dir: "; $CMD -I2
+printf "Default font dir: "; $CMD -I2
 if [ -n "$FONTDIR" ]; then
 	FIGLET_FONTDIR="$FONTDIR"
 	export FIGLET_FONTDIR
 fi
-echo -n "Current font dir: "; $CMD -I2
-echo -n "Default font: "; $CMD -I3
+printf "Current font dir: "; $CMD -I2
+printf "Default font: "; $CMD -I3
 $CMD -f small "Test results" | tee -a $LOGFILE
 
 run_test 001 "showfigfonts output" "./showfigfonts"
