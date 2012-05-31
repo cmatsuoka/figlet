@@ -6,7 +6,7 @@ licensed ISO8859 map files.  The full list of changes is:
 
 o	Add regression tests for uskata and jis0201 control files
 
-o	Properly escape mins signs in figlist(6) man page (Jonathan
+o	Properly escape minus signs in figlist(6) man page (Jonathan
 	McCrohan)
 
 o	Fix chkfont coredump on invalid input (Kenneth Davies and
@@ -14,6 +14,11 @@ o	Fix chkfont coredump on invalid input (Kenneth Davies and
 
 o	Update ISO8859 map files to fix licensing issue raised in Debian
 	bugs 673096 and 674844
+
+o	Re-add missing figmagic and getopt.c files which were left out
+	of releases 2.2.3 and 2.2.4
+
+o	Fix output of test script in MacOS X
 
 These changes were made by Claudio Matsuoka <cmatsuoka@gmail.com>
 31 May 2012
