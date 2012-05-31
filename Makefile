@@ -57,9 +57,9 @@ DIST	= figlet-$(VERSION)
 OBJS	= figlet.o zipio.o crc.o inflate.o utf8.o
 BINS	= figlet chkfont figlist showfigfonts
 MANUAL	= figlet.6 chkfont.6 figlist.6 showfigfonts.6
-DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) chkfont.c \
+DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) chkfont.c getopt.c \
 	  figlist showfigfonts CHANGES FAQ README LICENSE figfont.txt \
-	  crc.h inflate.h zipio.h utf8.h run-tests.sh
+	  crc.h inflate.h zipio.h utf8.h run-tests.sh figmagic
 
 .c.o:
 	$(CC) -c $(CFLAGS) $(XCFLAGS) -DDEFAULTFONTDIR=\"$(DEFAULTFONTDIR)\" \
