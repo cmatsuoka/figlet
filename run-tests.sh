@@ -73,7 +73,7 @@ run_test 022 "short line output" "$cmd -w5"
 run_test 023 "kerning paragraph centered mode (small)" "$cmd -kpc -fsmall"
 run_test 024 "list of control files" "ls fonts/*flc"
 run_test 025 "uskata control file" "printf 'ABCDE'|$CMD -fbanner -Cuskata"
-run_test 026 "jis0201 control file" "printf '\xB1\xB2\xB3\xB4\xB5'|$CMD -fbanner -Cjis0201"
+run_test 026 "jis0201 control file" "printf '\261\262\263\264\265'|$CMD -fbanner -Cjis0201"
 
 rm -f "$OUTPUT"
 
