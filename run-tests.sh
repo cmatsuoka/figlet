@@ -4,7 +4,7 @@ LC_ALL=POSIX
 export LC_ALL
 
 TESTDIR=tests
-OUTPUT=`mktemp`
+OUTPUT=.test-output.txt
 LOGFILE=tests.log
 CMD=./figlet
 FONTDIR="$1"
@@ -67,7 +67,7 @@ run_test 018 "tlf2 overlap centered mode" "$cmd -oc -f tests/emboss"
 run_test 019 "tlf2 full-width flush-left right-to-left mode" \
   "$cmd -WRl -f tests/emboss"
 run_test 020 "specify font directory" \
-  "X=`mktemp -d`;cp fonts/script.flf \$X/foo.flf;$cmd -d\$X -ffoo;rm -Rf \$X"
+  "X=.t;mkdir \$X;cp fonts/script.flf \$X/foo.flf;$cmd -d\$X -ffoo;rm -Rf \$X"
 run_test 021 "paragraph mode long line output" "$cmd -p -w250"
 run_test 022 "short line output" "$cmd -w5"
 run_test 023 "kerning paragraph centered mode (small)" "$cmd -kpc -fsmall"
