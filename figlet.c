@@ -1452,6 +1452,9 @@ int smushamt()
   maxsmush = currcharwidth;
   for (row=0;row<charheight;row++) {
     if (right2left) {
+      if (maxsmush>STRLEN(outputline[row])) {
+        maxsmush=STRLEN(outputline[row]);
+        }
       for (charbd=STRLEN(currchar[row]);
         ch1=currchar[row][charbd],(charbd>0&&(!ch1||ch1==' '));charbd--) ;
       for (linebd=0;ch2=outputline[row][linebd],ch2==' ';linebd++) ;
