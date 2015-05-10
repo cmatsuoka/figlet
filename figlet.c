@@ -1141,6 +1141,8 @@ inchr theord;
   fcharlist->thechar = (outchr**)myalloc(sizeof(outchr*)*charheight);
   fcharlist->next = fclsave;
 
+  outline[0] = 0;
+
   for (row=0;row<charheight;row++) {
     if (myfgets(templine,MAXLEN,file)==NULL) {
       templine[0] = '\0';
