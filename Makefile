@@ -102,8 +102,7 @@ dist:
 	@ls -l $(DIST).tar.gz
 
 check:
-	@echo -n "Run tests in "
-	@pwd
+	@echo "Run tests in `pwd`"
 	@./run-tests.sh fonts
 	@echo
 
