@@ -31,7 +31,7 @@
 #define _BOM	0xfeff
 
 static int __wchar_forbitten(wchar_t sym);
-static int __utf8_forbitten(u_char octet);
+static int __utf8_forbitten(uint8_t octet);
 
 static int
 __wchar_forbitten(wchar_t sym)
@@ -45,7 +45,7 @@ __wchar_forbitten(wchar_t sym)
 }
 
 static int
-__utf8_forbitten(u_char octet)
+__utf8_forbitten(uint8_t octet)
 {
 
 	switch (octet) {
@@ -89,7 +89,7 @@ size_t
 utf8_to_wchar(const char *in, size_t insize, wchar_t *out, size_t outsize,
     int flags)
 {
-	u_char *p, *lim;
+	uint8_t *p, *lim;
 	wchar_t *wlim, high;
 	size_t n, total, i, n_bits;
 
@@ -97,7 +97,7 @@ utf8_to_wchar(const char *in, size_t insize, wchar_t *out, size_t outsize,
 		return (0);
 
 	total = 0;
-	p = (u_char *)in;
+	p = (uint8_t *)in;
 	lim = p + insize;
 	wlim = out + outsize;
 
@@ -220,7 +220,7 @@ wchar_to_utf8(const wchar_t *in, size_t insize, char *out, size_t outsize,
     int flags)
 {
 	wchar_t *w, *wlim, ch;
-	u_char *p, *lim, *oc;
+	uint8_t *p, *lim, *oc;
 	size_t total, n;
 
 	if (in == NULL || insize == 0 || (outsize == 0 && out != NULL))
@@ -228,7 +228,7 @@ wchar_to_utf8(const wchar_t *in, size_t insize, char *out, size_t outsize,
 
 	w = (wchar_t *)in;
 	wlim = w + insize;
-	p = (u_char *)out;
+	p = (uint8_t *)out;
 	lim = p + outsize;
 	total = 0;
 	for (; w < wlim; w++) {
@@ -269,7 +269,7 @@ wchar_to_utf8(const wchar_t *in, size_t insize, char *out, size_t outsize,
 
 		/* make it work under different endians */
 		ch = htonl(*w);
-		oc = (u_char *)&ch;
+		oc = (uint8_t *)&ch;
 		switch (n) {
 		case 1:
 			*p = oc[3];
