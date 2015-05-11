@@ -1442,7 +1442,7 @@ outchr lch,rch;
 
 int smushamt()
 {
-  int maxsmush,amt;
+  size_t maxsmush,amt;
   int row,linebd,charbd;
   outchr ch1,ch2;
 
