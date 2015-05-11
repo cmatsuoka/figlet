@@ -107,10 +107,10 @@ check:
 	@echo
 
 vercheck:
-	@echo -n "Infocode: "; ./figlet -I1
+	@printf "Infocode: "; ./figlet -I1
 	@./figlet -v|sed -n '/Version/s/.*\(Version\)/\1/p'
-	@echo -n "README: "; head -1 < README|sed 's/.*) //'
-	@echo -n "FAQ: "; grep latest FAQ|sed 's/ and can.*//'
+	@printf "README: "; head -1 < README|sed 's/.*) //'
+	@printf "FAQ: "; grep latest FAQ|sed 's/ and can.*//'
 	@grep -h "^\.TH" *.6
 
 $(OBJS) chkfont.o getopt.o: Makefile
