@@ -66,7 +66,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>     /* Needed for get_columns */
 
-#ifdef unix
+#if defined(unix) || defined(__unix__) || defined(__APPLE__)
 #include <unistd.h>
 #include <sys/ioctl.h> /* Needed for get_columns */
 #endif
