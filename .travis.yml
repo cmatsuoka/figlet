@@ -10,17 +10,17 @@ os:
   - linux
   - osx
 
-script: make && make check
+script: make CC=$CC && make check
 
 matrix:
   include:
     - os: linux
       compiler: i586-mingw32msvc-gcc
-      script: make
+      script: make CC=$CC
     - os: linux
       compiler: '"clang -fsanitize=address"'
-      script: make && make check
+      script: make CC=$CC && make check
     - os: linux
       compiler: '"clang -fsanitize=memory"'
-      script: make && make check
+      script: make CC=$CC && make check
 
