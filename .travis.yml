@@ -1,0 +1,26 @@
+language: c
+
+sudo: false
+
+compiler:
+  - gcc
+  - clang
+
+os:
+  - linux
+  - osx
+
+script: make && make check
+
+matrix:
+  include:
+    - os: linux
+      compiler: i586-mingw32msvc-gcc
+      script: make
+    - os: linux
+      compiler: '"clang -fsanitize=address"'
+      script: make && make check
+    - os: linux
+      compiler: '"clang -fsanitize=memory"'
+      script: make && make check
+
