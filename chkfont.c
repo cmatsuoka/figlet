@@ -83,6 +83,7 @@ char *suffix;
   char ucsuffix[10];
   char *s;
 
+  if (strlen(suffix) > 9) return 1;
   strcpy(ucsuffix,suffix);
   for (s = ucsuffix; *s; s++) {
     *s = toupper(*s);
