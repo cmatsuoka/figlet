@@ -214,9 +214,9 @@ if (minleadblanks+mintrailblanks>0 && old_layout>=0) {
 void checkit()
 {
 int i,k,cmtcount,numsread,ffrighttoleft,have_layout,layout;
-char magicnum[5],cha;
+char magicnum[5];
 long oldord,theord;
-int tmpcnt,len;
+int tmpcnt,len,cha;
 
 ec=0;wc=0;
 incon_endmarkwarn=0; endmark_countwarn=0; nonincrwarn=0;
