@@ -1369,8 +1369,11 @@ outchr lch,rch;
 
   if ((smushmode & 63) == 0) {
     /* This is smushing by universal overlapping. */
+    /* Unreachable code: lch==' ' or rch==' ' already handled!
     if (lch==' ') return rch;
     if (rch==' ') return lch;
+    */
+
     if (lch==hardblank) return rch;
     if (rch==hardblank) return lch;
       /* Above four lines ensure overlapping preference to */
