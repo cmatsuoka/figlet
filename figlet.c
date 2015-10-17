@@ -1923,7 +1923,7 @@ inchr getinchr()
     }
 
   switch(multibyte) {
-    case 0: /* single-byte */
+   case 0: /* single-byte */
       return iso2022();
    case 1: /* DBCS */
      ch = Agetchar();
