@@ -306,6 +306,11 @@ if (maxlen<1) {
   ec++;
   weregone(1); if (gone) return;
   }
+if (maxlen>255) {
+  printf("%s: ERROR (fatal)- character too wide.\n",fontfilename);
+  ec++;
+  weregone(1); if (gone) return;
+  }
 if (old_layout<-1) {
   printf("%s: ERROR- old_layout < -1.\n",fontfilename);
   ec++;
