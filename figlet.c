@@ -92,7 +92,7 @@ Note: '/' also used in filename in get_columns(). */
 #define CONTROLFILESUFFIX ".flc"
 #define CONTROLFILEMAGICNUMBER "flc2"   /* no longer used in 2.2 */
 #define CSUFFIXLEN MYSTRLEN(CONTROLFILESUFFIX)
-#define DEFAULTCOLUMNS 80
+#define DEFAULTCOLUMNS 132
 #define MAXLEN 255     /* Maximum character width */
 
 /* Add support for Sam Hocevar's TOIlet fonts */
@@ -257,13 +257,17 @@ char *myname;
 
 int get_columns()
 {
-  struct winsize ws;
-  int fd,result;
+  if(!code_comments) {
+    struct winsize ws;
+    int fd,result;
 
-  if ((fd = open("/dev/tty",O_WRONLY))<0) return -1;
-  result = ioctl(fd,TIOCGWINSZ,&ws);
-  close(fd);
-  return result?-1:ws.ws_col;
+    if ((fd = open("/dev/tty",O_WRONLY))<0) return -1;
+    result = ioctl(fd,TIOCGWINSZ,&ws);
+    close(fd);
+    return result?-1:ws.ws_col;
+  } else {
+    return 0;
+  }
 }
 #endif /* ifdef TIOCGWINSZ */
 
