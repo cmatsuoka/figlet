@@ -132,7 +132,7 @@ int gndbl[4]; /* gndbl[n] is true if Gn is double-byte */
 inchr gn[4]; /* Gn character sets: ASCII, Latin-1, none, none */
 int gl; /* 0-3 specifies left-half Gn character set */
 int gr; /* 0-3 specifies right-half Gn character set */
-int  code_comments = 0; /* Generate C/C++/Java code comments */
+int code_comments = 0; /* Generate C/C++/Java code comments */
 int Myargc;  /* to avoid passing around argc and argv */
 char **Myargv;
 
