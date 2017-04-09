@@ -20,9 +20,9 @@ SHELL = /bin/sh
 
 # The C compiler and linker to use
 CC	= gcc
-CFLAGS	= -g -O2 -Wall -Wno-unused-value
+CFLAGS	= -g -O2 -Wall -Wno-unused-value -fPIE
 LD	= gcc
-LDFLAGS =
+LDFLAGS = -pie
 
 # Feature flags:
 #   define TLF_FONTS to use TOIlet TLF fonts
@@ -60,6 +60,8 @@ MANUAL	= figlet.6 chkfont.6 figlist.6 showfigfonts.6
 DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) chkfont.c getopt.c \
 	  figlist showfigfonts CHANGES FAQ README LICENSE figfont.txt \
 	  crc.h inflate.h zipio.h utf8.h run-tests.sh figmagic
+
+.PHONY: all clean install check vercheck
 
 .c.o:
 	$(CC) -c $(CFLAGS) $(XCFLAGS) -DDEFAULTFONTDIR=\"$(DEFAULTFONTDIR)\" \
@@ -101,7 +103,7 @@ dist:
 	@echo
 	@ls -l $(DIST).tar.gz
 
-check:
+check: all
 	@echo "Run tests in `pwd`"
 	@./run-tests.sh fonts
 	@echo

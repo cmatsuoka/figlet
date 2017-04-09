@@ -92,7 +92,7 @@ Note: '/' also used in filename in get_columns(). */
 #define CONTROLFILESUFFIX ".flc"
 #define CONTROLFILEMAGICNUMBER "flc2"   /* no longer used in 2.2 */
 #define CSUFFIXLEN MYSTRLEN(CONTROLFILESUFFIX)
-#define DEFAULTCOLUMNS 80
+#define DEFAULTCOLUMNS (code_comments ? 120 : 80)
 #define MAXLEN 255     /* Maximum character width */
 
 /* Add support for Sam Hocevar's TOIlet fonts */
@@ -132,7 +132,7 @@ int gndbl[4]; /* gndbl[n] is true if Gn is double-byte */
 inchr gn[4]; /* Gn character sets: ASCII, Latin-1, none, none */
 int gl; /* 0-3 specifies left-half Gn character set */
 int gr; /* 0-3 specifies right-half Gn character set */
-
+int code_comments = 0; /* Generate C/C++/Java code comments */
 int Myargc;  /* to avoid passing around argc and argv */
 char **Myargv;
 
@@ -257,13 +257,17 @@ char *myname;
 
 int get_columns()
 {
-  struct winsize ws;
-  int fd,result;
+  if(!code_comments) {
+    struct winsize ws;
+    int fd,result;
 
-  if ((fd = open("/dev/tty",O_WRONLY))<0) return -1;
-  result = ioctl(fd,TIOCGWINSZ,&ws);
-  close(fd);
-  return result?-1:ws.ws_col;
+    if ((fd = open("/dev/tty",O_WRONLY))<0) return -1;
+    result = ioctl(fd,TIOCGWINSZ,&ws);
+    close(fd);
+    return result?-1:ws.ws_col;
+  } else {
+    return 0;
+  }
 }
 #endif /* ifdef TIOCGWINSZ */
 
@@ -943,9 +947,12 @@ void getparams()
   outputwidth = DEFAULTCOLUMNS;
   gn[1] = 0x80;
   gr = 1;
-  while ((c = getopt(Myargc,Myargv,"ADEXLRI:xlcrpntvm:w:d:f:C:NFskSWo"))!= -1) {
+  while ((c = getopt(Myargc,Myargv,"ADEXLRI:xlcrpntjvm:w:d:f:C:NFskSWo"))!= -1) {
       /* Note: -F is not a legal option -- prints a special err message.  */
     switch (c) {
+      case 'j':
+        code_comments = 1;
+        break;
       case 'A':
         cmdinput = 1;
         break;
@@ -1559,9 +1566,14 @@ outchr *string;
   size_t size;
   wchar_t wc[2];
 #endif
-
   len = STRLEN(string);
   if (outputwidth>1) {
+    if(len && code_comments)
+    {
+      putchar(' ');
+      putchar('*');
+      putchar(' ');
+    }
     if (len>outputwidth-1) {
       len = outputwidth-1;
       }
@@ -1602,10 +1614,23 @@ outchr *string;
 void printline()
 {
   int i;
-
+  if(code_comments)
+  {
+    putchar('/');
+    putchar('*');
+    putchar('*');
+    putchar('\n');
+  }
   for (i=0;i<charheight;i++) {
     putstring(outputline[i]);
-    }
+  }
+  if(code_comments)
+  {
+    putchar(' ');
+    putchar('*');
+    putchar('/');
+    putchar('\n');
+  }
   clearline();
 }
 
