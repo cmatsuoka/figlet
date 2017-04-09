@@ -22,7 +22,7 @@ SHELL = /bin/sh
 CC	= gcc
 CFLAGS	= -g -O2 -Wall -Wno-unused-value -fPIE
 LD	= gcc
-LDFLAGS =
+LDFLAGS = -pie
 
 # Feature flags:
 #   define TLF_FONTS to use TOIlet TLF fonts
