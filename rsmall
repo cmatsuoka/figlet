@@ -1,3 +1,0 @@
-#$(dirname $0)/figlet -j -m 0 -f $(dirname $0)/fonts/small.flf $@
-$(dirname $0)/figlet -j  -f $(dirname $0)/fonts/small.flf $@
-
