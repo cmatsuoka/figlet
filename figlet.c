@@ -92,7 +92,7 @@ Note: '/' also used in filename in get_columns(). */
 #define CONTROLFILESUFFIX ".flc"
 #define CONTROLFILEMAGICNUMBER "flc2"   /* no longer used in 2.2 */
 #define CSUFFIXLEN MYSTRLEN(CONTROLFILESUFFIX)
-#define DEFAULTCOLUMNS 132
+#define DEFAULTCOLUMNS (code_comments ? 120 : 80)
 #define MAXLEN 255     /* Maximum character width */
 
 /* Add support for Sam Hocevar's TOIlet fonts */
@@ -132,7 +132,7 @@ int gndbl[4]; /* gndbl[n] is true if Gn is double-byte */
 inchr gn[4]; /* Gn character sets: ASCII, Latin-1, none, none */
 int gl; /* 0-3 specifies left-half Gn character set */
 int gr; /* 0-3 specifies right-half Gn character set */
-int  code_comments = 0;
+int  code_comments = 0; /* Generate C/C++/Java code comments */
 int Myargc;  /* to avoid passing around argc and argv */
 char **Myargv;
 
