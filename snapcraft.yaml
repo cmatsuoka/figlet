@@ -1,0 +1,45 @@
+name: figlet
+base: core18
+version: git #'2.2.5+git'
+summary: A program for making large letters out of ordinary text
+description: |
+  FIGlet is a program to print text banners using large characters.
+  The name derives from "Frank, Ian and Glenn's letters".
+
+grade: devel
+confinement: strict
+
+parts:
+  figlet:
+    plugin: make
+    source: .
+    make-parameters:
+      - prefix=
+    build-packages:
+      - gcc
+
+apps:
+  figlet:
+    command: bin/figlet
+    environment:
+      FIGLET_FONTDIR: $SNAP/share/figlet
+    plugs:
+      - home
+  figlist:
+    command: bin/figlist
+    environment:
+      FIGLET_FONTDIR: $SNAP/share/figlet
+    plugs:
+      - home
+  chkfont:
+    command: bin/chkfont
+    environment:
+      FIGLET_FONTDIR: $SNAP/share/figlet
+    plugs:
+      - home
+  showfigfonts:
+    command: bin/showfigfonts
+    environment:
+      FIGLET_FONTDIR: $SNAP/share/figlet
+    plugs:
+      - home
