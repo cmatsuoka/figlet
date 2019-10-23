@@ -77,13 +77,13 @@ clean:
 	rm -f *.o *~ core figlet chkfont
 
 install: all
-	mkdir -p $(DESTDIR)$(BINDIR)
-	mkdir -p $(DESTDIR)$(MANDIR)/man6
-	mkdir -p $(DESTDIR)$(DEFAULTFONTDIR)
-	cp $(BINS) $(DESTDIR)$(BINDIR)
-	cp $(MANUAL) $(DESTDIR)$(MANDIR)/man6
-	cp fonts/*.flf $(DESTDIR)$(DEFAULTFONTDIR)
-	cp fonts/*.flc $(DESTDIR)$(DEFAULTFONTDIR)
+	install -d -m 0755 $(DESTDIR)$(BINDIR)
+	install -d -m 0755 $(DESTDIR)$(MANDIR)/man6
+	install -d -m 0755 $(DESTDIR)$(DEFAULTFONTDIR)
+	install -m 0755 $(BINS) $(DESTDIR)$(BINDIR)
+	install -m 0644 $(MANUAL) $(DESTDIR)$(MANDIR)/man6
+	install -m 0644 fonts/*.flf $(DESTDIR)$(DEFAULTFONTDIR)
+	install -m 0644 fonts/*.flc $(DESTDIR)$(DEFAULTFONTDIR)
 
 dist:
 	rm -Rf $(DIST) $(DIST).tar.gz
