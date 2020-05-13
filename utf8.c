@@ -16,8 +16,12 @@
  */
 #include <sys/types.h>
 
+#ifdef	Msys
+#include <winsock2.h>
+#else
 #include <wchar.h>
 #include <arpa/inet.h>	/* for htonl() */
+#endif
 
 #include "utf8.h"
 

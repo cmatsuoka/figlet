@@ -24,6 +24,21 @@ CFLAGS	= -g -O2 -Wall -Wno-unused-value
 LD	= gcc
 LDFLAGS =
 
+# Tested on
+# Bash Ubuntu (Windows 10)
+# Cygwin	  (Windows 10)
+# Msys2		  (Windows 10)
+# Debian	  (Deepin)
+ifeq	($(OS),Windows_NT)
+ifeq	($(shell uname -o),Cygwin)
+CFLAGS	+=
+LDLIBS	+=
+else
+CFLAGS	+=	-D Msys
+LDLIBS	+=	-lws2_32
+endif
+endif
+
 # Feature flags:
 #   define TLF_FONTS to use TOIlet TLF fonts
 XCFLAGS	= -DTLF_FONTS
@@ -68,7 +83,7 @@ DFILES	= Makefile Makefile.tc $(MANUAL) $(OBJS:.o=.c) chkfont.c getopt.c \
 all: $(BINS)
 
 figlet: $(OBJS)
-	$(LD) $(LDFLAGS) -o $@ $(OBJS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
 
 chkfont: chkfont.o
 	$(LD) $(LDFLAGS) -o $@ chkfont.o
@@ -114,9 +129,10 @@ vercheck:
 	@grep -h "^\.TH" *.6
 
 $(OBJS) chkfont.o getopt.o: Makefile
-chkfont.o: chkfont.c
-crc.o: crc.c crc.h
-figlet.o: figlet.c zipio.h
-getopt.o: getopt.c
-inflate.o: inflate.c inflate.h
-zipio.o: zipio.c zipio.h inflate.h crc.h
+
+chkfont.o:	chkfont.c
+crc.o:		crc.c     crc.h
+figlet.o:	figlet.c  zipio.h
+getopt.o:	getopt.c
+inflate.o:	inflate.c inflate.h
+zipio.o:	zipio.c   zipio.h inflate.h crc.h
