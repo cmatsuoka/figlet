@@ -315,7 +315,7 @@ static void BufferInitialize(
 }
 
 /* pump data till length bytes of file are inflated or error encountered */
-static int BufferPump(struct ZipioState *zs, long length)
+static int BufferPump(struct ZipioState *zs, unsigned long length)
 {
   size_t inplen, ret;
 
@@ -352,7 +352,7 @@ static int BufferRead(
   struct ZipioState *zs,
   long offset,
   unsigned char *buffer,
-  long length
+  unsigned long length
 )
 {
   /*
@@ -427,7 +427,7 @@ static int BufferRead(
 static int BufferAppend(
   struct ZipioState *zs,
   unsigned char *buffer,
-  long length
+  size_t length
 )
 {
   /* If using file buffering, just append the data from the file */
