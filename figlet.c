@@ -104,6 +104,11 @@ Note: '/' also used in filename in get_columns(). */
 int toiletfont;	/* true if font is a TOIlet TLF font */
 #endif
 
+#ifdef DEBUG
+#define debugprint(...) fprintf (stderr, __VA_ARGS__)
+#else
+#define debugprint(...) 
+#endif
 
 /****************************************************************************
 
@@ -285,6 +290,7 @@ int size;
 #endif
 {
   char *ptr;
+  int i;
 #ifndef __STDC__
   extern void *malloc();
 #endif
@@ -294,6 +300,10 @@ int size;
     exit(1);
     }
   else {
+    debugprint("* allocated %d bytes: %s\n",size,ptr);
+    for(i=0;i<size;i++){
+        ptr[i]=0;
+    }
     return ptr;
     }
 }
@@ -1109,9 +1119,16 @@ void clearline()
 {
   int i;
 
+  int j;
+  debugprint("clearline outlinelen %d\n",outlinelen);
   for (i=0;i<charheight;i++) {
     outputline[i][0] = '\0';
     }
+  for (i=0;i<charheight;i++) {
+    for (j=0;j<outlinelen;j++) {  
+        outputline[i][j] = '\0';
+    }
+  }
   outlinelen = 0;
   inchrlinelen = 0;
 }
@@ -1333,6 +1350,7 @@ inchr c;
     }
   previouscharwidth = currcharwidth;
   currcharwidth = STRLEN(currchar[0]);
+  debugprint( "character %d is %d cells wide\n",c,currcharwidth);
 }
 
 
@@ -1454,6 +1472,10 @@ int smushamt()
     }
   maxsmush = currcharwidth;
   for (row=0;row<charheight;row++) {
+    if(maxsmush>STRLEN(outputline[row])){
+        debugprint("maxsmush reduced from %d to %d\n",maxsmush,STRLEN(outputline[row]));
+        maxsmush=STRLEN(outputline[row]);
+    }
     if (right2left) {
       if (maxsmush>STRLEN(outputline[row])) {
         maxsmush=STRLEN(outputline[row]);
@@ -1502,21 +1524,27 @@ inchr c;
 
   getletter(c);
   smushamount = smushamt();
+  debugprint("outlinelen %d currcharwidth %d smushamount %d outlinelenlimit %d\n",outlinelen,currcharwidth, smushamount, outlinelenlimit);  
   if (outlinelen+currcharwidth-smushamount>outlinelenlimit
       ||inchrlinelen+1>inchrlinelenlimit) {
+      debugprint("too long: %d > %d\n",outlinelen+currcharwidth-smushamount,outlinelenlimit);
     return 0;
     }
 
   templine = (outchr*)myalloc(sizeof(outchr)*(outlinelenlimit+1));
   for (row=0;row<charheight;row++) {
     if (right2left) {
+        debugprint("row %d actual length %d outlinelen %d\n", row, STRLEN(outputline[row]),outlinelen);  
       STRCPY(templine,currchar[row]);
       for (k=0;k<smushamount;k++) {
         templine[currcharwidth-smushamount+k] =
           smushem(templine[currcharwidth-smushamount+k],outputline[row][k]);
         }
+        debugprint("row %d smush %d \n outlinelen %d add %d to %d of %d\n", row,smushamount,outlinelen,STRLEN(outputline[row]+smushamount),STRLEN(templine),outlinelenlimit+1);  
       STRCAT(templine,outputline[row]+smushamount);
+        debugprint("  merged: templine %d of %d\n",STRLEN(templine),outlinelenlimit+1);  
       STRCPY(outputline[row],templine);
+        debugprint("  out: \n%s\n%s %d\n", templine, outputline[row], STRLEN(outputline[row]));  
       }
     else {
       for (k=0;k<smushamount;k++) {
@@ -1530,9 +1558,13 @@ inchr c;
       STRCAT(outputline[row],currchar[row]+smushamount);
       }
     }
+    debugprint("about to free templine (%d/%d)\n",outlinelenlimit+1,STRLEN(templine));  
   free(templine);
+    debugprint("freed templine\n");  
   outlinelen = STRLEN(outputline[0]);
+  debugprint("reset outlinelen: %d\n",outlinelen);  
   inchrline[inchrlinelen++] = c;
+  debugprint("added %d length %d\n",c,outlinelen);
   return 1;
 }
 
@@ -1603,6 +1635,7 @@ void printline()
 {
   int i;
 
+   debugprint("printline\n");
   for (i=0;i<charheight;i++) {
     putstring(outputline[i]);
     }
@@ -1646,6 +1679,7 @@ void splitline()
   for (i=0;i<len2;i++) {
     part2[i] = inchrline[lastspace+1+i];
     }
+    debugprint("splitline: %s %s\n",part1,part2);
   clearline();
   for (i=0;i<len1;i++) {
     addchar(part1[i]);
