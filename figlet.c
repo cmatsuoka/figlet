@@ -79,6 +79,8 @@
 
 #include "zipio.h"     /* Package for reading compressed files */
 
+#include <getopt.h> /* Fix the problem that implicit declaration of function 'getopt' is invalid in C99 */
+
 #define MYSTRLEN(x) ((int)strlen(x)) /* Eliminate ANSI problem */
 
 #define DIRSEP '/'
