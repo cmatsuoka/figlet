@@ -43,8 +43,9 @@ else
   fi
 fi
 
-FONTLIST=`ls "$FONTDIR"/*.flf | sed 's!.*/\(.*\)\.flf$!\1!'`
-for F in $FONTLIST ; do
+for F in "$FONTDIR"/*.flf ; do
+  F=${F##*/}
+  F=${F%.flf}
   echo "$F :"
   if [ -n "$WORD" ]; then
     echo "$WORD" | $FIGLET -d "$FONTDIR" -f "$F"
