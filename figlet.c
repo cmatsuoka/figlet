@@ -54,7 +54,7 @@
 #define DEFAULTFONTDIR "fonts"
 #endif
 #ifndef DEFAULTFONTFILE
-#define DEFAULTFONTFILE "standard.flf"
+#define DEFAULTFONTFILE "standard"
 #endif
 
 #include <stdio.h>
