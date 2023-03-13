@@ -54,7 +54,7 @@
 #define DEFAULTFONTDIR "fonts"
 #endif
 #ifndef DEFAULTFONTFILE
-#define DEFAULTFONTFILE "standard.flf"
+#define DEFAULTFONTFILE "standard"
 #endif
 
 #include <stdio.h>
@@ -410,12 +410,10 @@ void printusage(out)
 FILE *out;
 {
   fprintf(out,
-    "Usage: %s [ -cklnoprstvxDELNRSWX ] [ -d fontdirectory ]\n",
+    "Usage: %s [ -cklnoprstvxDELNRSWX ] [ -d fontdirectory ]\n"
+    "              [ -f fontfile ] [ -m smushmode ] [ -w outputwidth ]\n"
+    "              [ -C controlfile ] [ -I infocode ] [ message ]\n",
     myname);
-  fprintf(out,
-    "              [ -f fontfile ] [ -m smushmode ] [ -w outputwidth ]\n");
-  fprintf(out,
-    "              [ -C controlfile ] [ -I infocode ] [ message ]\n");
 }
 
 
@@ -432,17 +430,18 @@ int infonum;
 {
   switch (infonum) {
     case 0: /* Copyright message */
-      printf("FIGlet Copyright (C) 1991-2012 Glenn Chappell, Ian Chai, ");
-      printf("John Cowan,\nChristiaan Keet and Claudio Matsuoka\n");
-      printf("Internet: <info@figlet.org> ");
-      printf("Version: %s, date: %s\n\n",VERSION,DATE);
-      printf("FIGlet, along with the various FIGlet fonts");
-      printf(" and documentation, may be\n");
-      printf("freely copied and distributed.\n\n");
-      printf("If you use FIGlet, please send an");
-      printf(" e-mail message to <info@figlet.org>.\n\n");
-      printf("The latest version of FIGlet is available from the");
-      printf(" web site,\n\thttp://www.figlet.org/\n\n");
+      printf("FIGlet Copyright (C) 1991-2012 Glenn Chappell, Ian Chai, "
+             "John Cowan,\nChristiaan Keet and Claudio Matsuoka\n"
+             "Internet: <info@figlet.org> "
+             "Version: %s, date: %s\n\n"
+             "FIGlet, along with the various FIGlet fonts"
+             " and documentation, may be\n"
+             "freely copied and distributed.\n\n"
+             "If you use FIGlet, please send an"
+             " e-mail message to <info@figlet.org>.\n\n"
+             "The latest version of FIGlet is available from the"
+             " web site,\n\thttp://www.figlet.org/\n\n",
+       VERSION,DATE);
       printusage(stdout);
       break;
     case 1: /* Version (integer) */
@@ -1073,14 +1072,15 @@ void getparams()
       case 'F': /* Not a legal option */
         fprintf(stderr,"%s: illegal option -- F\n",myname);
         printusage(stderr);
-        fprintf(stderr,"\nBecause of numerous incompatibilities, the");
-        fprintf(stderr," \"-F\" option has been\n");
-        fprintf(stderr,"removed.  It has been replaced by the \"figlist\"");
-        fprintf(stderr," program, which is now\n");
-        fprintf(stderr,"included in the basic FIGlet package.  \"figlist\"");
-        fprintf(stderr," is also available\n");
-        fprintf(stderr,"from  http://www.figlet.org/");
-        fprintf(stderr,"under UNIX utilities.\n");
+        fprintf(stderr,
+          "\nBecause of numerous incompatibilities, the"
+          " \"-F\" option has been\n"
+          "removed.  It has been replaced by the \"figlist\""
+          " program, which is now\n"
+          "included in the basic FIGlet package.  \"figlist\""
+          " is also available\n"
+          "from  http://www.figlet.org/"
+          "under UNIX utilities.\n");
         exit(1);
         break;
       default:
